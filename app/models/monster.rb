@@ -8,7 +8,7 @@ class Monster < ApplicationRecord
   validates :hunger, presence: true, :numericality => { :only_integer => true, :greater_than => -1, :less_than => 6 }
   validates :strength, presence: true, :numericality => { :only_integer => true, :greater_than => -1, :less_than => 6 }
   validates :poop, presence: true, :numericality => { :only_integer => true, :greater_than => -1, :less_than => 5 }
-  validates_presence_of :sick
+  validates :sick, inclusion: [true, false]
   validates :death, presence: true, :numericality => { :only_integer => true, :greater_than => -1, :less_than => 31 }
   validates :level, presence: true, inclusion: ['Egg', 'Baby', 'Training', 'Rookie', 'Champion', 'Ultimate']
 end
