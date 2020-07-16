@@ -40,6 +40,7 @@ RSpec.describe "Monsters", type: :request do
     context 'when the monster is valid' do
       before(:example) do
         @monster_params = attributes_for(:monster)
+        p @monster_params
         post '/monsters', params: { monster: @monster_params }
       end
 
