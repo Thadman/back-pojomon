@@ -35,3 +35,5 @@ example_id                                        | status | run_time        |
 ./spec/requests/monsters_request_spec.rb[1:1:3]   | passed | 0.03194 seconds |
 ./spec/requests/monsters_request_spec.rb[1:2:1:1] | failed | 0.04282 seconds |
 ./spec/requests/monsters_request_spec.rb[1:2:1:2] | failed | 0.03503 seconds |
+./spec/requests/users_request_spec.rb[1:1:1:1]    | passed | 0.18303 seconds |
+./spec/requests/users_request_spec.rb[1:1:1:2]    | passed | 0.06941 seconds |
