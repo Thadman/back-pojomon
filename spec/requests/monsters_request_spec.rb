@@ -4,11 +4,9 @@ RSpec.describe "Monsters", type: :request do
 
   describe 'GET #index' do
     before(:example) do
-      @first_monster = create(:monster)
-      # p @first_monster
-      @last_monster = create(:monster)
-      # p @last_monster
-      get '/monsters'
+      @user = user_with_monster
+      token = Knock::AuthToken.new(payload: {sub: @user.id}).token
+      get '/monsters', headers: { 'Authorization': "Bearer #{token}" }
       @json_response = JSON.parse(response.body)
     end
 
@@ -21,6 +19,8 @@ RSpec.describe "Monsters", type: :request do
     end
 
     it 'JSON response body contains expected attributes' do
+      @first_monster = @user.monsters.first
+
       expect(@json_response['monsters'][0]).to include({
         'user_id' => @first_monster.user_id,
         'name' => @first_monster.name,
@@ -36,12 +36,26 @@ RSpec.describe "Monsters", type: :request do
     end
   end
 
+  describe 'GET #show' do
+    before(:example) do
+      @monster = create(:monster)
+      @id = @monster.id
+      @user = @monster.user
+      token = Knock::AuthToken.new(payload: {sub: @user.id}).token
+      get "/monsters/#{@id}", headers: { 'Authorization': "Bearer #{token}" }
+      @json_response = JSON.parse(response.body)
+    end
+
+    it 'returns http success' do
+      expect(response).to have_http_status(:success)
+    end
+  end
+
   describe 'POST #create' do
     context 'when the monster is valid' do
       before(:example) do
         @monster_params = attributes_for(:monster)
-        p @monster_params
-        post '/monsters', params: { monster: @monster_params }
+        post '/monsters', params: { monster: @monster_params }, headers: authenticated_header
       end
 
       it 'returns http created' do
