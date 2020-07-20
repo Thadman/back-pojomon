@@ -25,7 +25,7 @@ Monster.create(
 
 Monster.create(
   user_id: 2, 
-  name: "Metal-Greymon", 
+  name: "Metal Greymon", 
   age: 15, weight: 50, 
   hunger: 5, 
   strength: 5, 
