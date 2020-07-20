@@ -67,4 +67,48 @@ RSpec.describe "Monsters", type: :request do
       end
     end
   end
+
+  describe 'PATCH #update' do
+    context 'when params are valid' do
+      before(:example) do
+        # @monster = create(:monster)
+        @monster = create(:monster)
+        @updated_name = 'Botomon'
+        @id = @monster.id
+        @user = @monster.user
+        token = Knock::AuthToken.new(payload: {sub: @user.id}).token
+        patch "/monsters/#{@id}", headers: { 'Authorization': "Bearer #{token}" }, params: { monster: { name: @updated_name } }
+        # @json_response = JSON.parse(response.body)
+      end
+
+      it 'has a http no content response status' do
+        expect(response).to have_http_status(:no_content) 
+      end
+
+      it 'updates the monster in the database' do 
+        expect(Monster.find(@id).name).to eq(@updated_name)
+      end
+
+    end
+
+    context 'when the params are invalid' do
+      before(:example) do
+        @monster = create(:monster)
+        @id = @monster.id
+        @user = @monster.user
+        token = Knock::AuthToken.new(payload: {sub: @user.id}).token
+        patch "/monsters/#{@id}", headers: { 'Authorization': "Bearer #{token}" }, params: { monster: { name: nil } }
+        @json_response = JSON.parse(response.body)
+      end
+
+      it 'returns an unprocessable entity response' do
+          expect(response).to have_http_status(:unprocessable_entity)
+      end  
+
+      it 'has the correct number of errors' do
+        expect(@json_response['errors'].count).to eq(2)
+      end
+
+    end
+  end
 end

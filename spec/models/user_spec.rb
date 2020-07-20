@@ -5,7 +5,7 @@ RSpec.describe User, type: :model do
   subject { described_class.new(
     username: 'Testing',
     email: 'test@email.com',
-    password_digest: 'Secure101'
+    password: 'Secure101'
   )}
   
   context 'validations' do
@@ -34,17 +34,17 @@ RSpec.describe User, type: :model do
     end
 
     it 'is not valid without a password' do
-      subject.password_digest = nil
+      subject.password = nil
       expect(subject).to_not be_valid
     end
 
     it 'is not valid with a password less than 8 characters' do
-      subject.password_digest = 'XxXxXxX'
+      subject.password = 'XxXxXxX'
       expect(subject).to_not be_valid
     end
 
     it 'is not valid with a username more than 32 characters' do
-      subject.password_digest = 'XxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxX'
+      subject.password = 'XxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxX'
       expect(subject).to_not be_valid
     end
   end

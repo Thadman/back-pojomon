@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Monster, type: :model do
 
-  let(:owner){User.create(username: 'Testing', email: 'test@email.com', password_digest: 'Secure101')}
+  let(:owner){User.create(username: 'Testing', email: 'test@email.com', password: 'Secure101')}
   subject { described_class.new(
     user_id: owner.id,
-    name: 'testmon', 
+    name: 'Agumon', 
     age: 3, # 0-infinite
     weight: 100,
     hunger: 5, # 0-5

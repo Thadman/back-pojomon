@@ -17,12 +17,20 @@ class MonstersController < ApplicationController
 
   def create
     monster = current_user.monsters.create(monster_params)
-    render json: monster, status: :created
+    if monster.save
+      render json: monster, status: :created
+    else
+      render json: { errors: monster.errors.full_messages }, status: :unprocessable_entity    
+    end
   end
 
   def update
-    @monster.update(monster_params)
-    render json: 'monster updated', status: 204
+
+    if @monster.update(monster_params) && @monster.user_id == current_user.id
+      render json: 'monster updated', status: 204
+    else
+      render json: { errors: @monster.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   private
