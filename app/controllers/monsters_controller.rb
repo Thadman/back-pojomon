@@ -2,6 +2,11 @@ class MonstersController < ApplicationController
   before_action :authenticate_user
   before_action :set_monster, except: [:index, :create]
   
+  def current
+    monster = current_user.monster.last
+    render json: { monster: monster, current_user: current_user.email }
+  end
+
   def index
     monsters = current_user.monsters.all
     render json: { monsters: monsters, current_user: current_user.email }
