@@ -1,9 +1,9 @@
 class MonstersController < ApplicationController
   before_action :authenticate_user
-  before_action :set_monster, except: [:index, :create]
+  before_action :set_monster, except: [:index, :create, :current]
   
   def current
-    monster = current_user.monster.last
+    monster = current_user.monsters.last
     render json: { monster: monster, current_user: current_user.email }
   end
 
