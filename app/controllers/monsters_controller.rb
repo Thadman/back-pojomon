@@ -4,12 +4,12 @@ class MonstersController < ApplicationController
   
   def current
     monster = current_user.monsters.last
-    render json: { monster: monster, current_user: current_user.email }
+    render json: { monster: monster, current_user: current_user }
   end
 
   def index
     monsters = current_user.monsters.all
-    render json: { monsters: monsters, current_user: current_user.email }
+    render json: { monsters: monsters, current_user: current_user }
   end
 
   def show
