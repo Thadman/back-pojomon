@@ -32,7 +32,7 @@ class MonstersController < ApplicationController
   def update
 
     if @monster.update(monster_params) && @monster.user_id == current_user.id
-      render json: 'monster updated', status: 204
+      render json: { monster: @monster, current_user: current_user }
     else
       render json: { errors: @monster.errors.full_messages }, status: :unprocessable_entity
     end
