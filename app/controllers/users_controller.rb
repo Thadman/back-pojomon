@@ -11,7 +11,7 @@ class UsersController < ApplicationController
       sick: false, 
       death: 30, 
       level: "Egg",
-      image: "Egg",
+      image: "egg",
       counter: 0
     )
     render json: "user created", status: :created

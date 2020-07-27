@@ -22,7 +22,8 @@ Monster.create(
   sick: false, 
   death: 30, 
   level: "Egg",
-  image: "Egg")
+  image: "egg",
+  counter: 0)
 
 Monster.create(
   user_id: 1, 
@@ -35,7 +36,8 @@ Monster.create(
   sick: false, 
   death: 30, 
   level: "Egg",
-  image: "Egg")
+  image: "egg",
+  counter: 0)
 
 p "Monster Created"
 
