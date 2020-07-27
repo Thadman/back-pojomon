@@ -21,18 +21,21 @@ Monster.create(
   poop: 0, 
   sick: false, 
   death: 30, 
-  level: "Egg")
+  level: "Egg",
+  image: "Egg")
 
 Monster.create(
-  user_id: 2, 
-  name: "Metal Greymon", 
-  age: 15, weight: 50, 
-  hunger: 5, 
-  strength: 5, 
+  user_id: 1, 
+  name: "Egg", 
+  age: 0, 
+  weight: 1, 
+  hunger: 0, 
+  strength: 0, 
   poop: 0, 
   sick: false, 
   death: 30, 
-  level: "Ultimate")
+  level: "Egg",
+  image: "Egg")
 
 p "Monster Created"
 

@@ -10,7 +10,8 @@ class UsersController < ApplicationController
       poop: 0, 
       sick: false, 
       death: 30, 
-      level: "Egg"
+      level: "Egg",
+      image: "Egg"
     )
     render json: "user created", status: :created
   end
